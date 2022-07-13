@@ -1,25 +1,60 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { 
+  Box, 
+  CssBaseline, 
+  Paper, 
+  ThemeProvider,
+  Typography 
+} from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { routes as appRoutes } from "./routes";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
+  // theme
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#0989e3",
+        light: "#63b8ff",
+        dark: "#005db0",
+        contrastText: "#000",
+      },
+      secondary: {
+        main: "#4db6ac",
+        light: "#82e9de",
+        dark: "#00867d",
+        contrastText: "#000",
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+
+      <Box
+        height='100vh'
+        display='flex'
+        flexDirection='column'
+      >
+        <Router>
+          <Navbar />
+          <Routes>
+            {appRoutes.map((route) => (
+              <Route
+                key={route.key}
+                path={route.path}
+                element={<route.component/>}
+              />
+            ))}
+          </Routes>
+          <Footer />
+        </Router>
+      </Box>
+    </ThemeProvider>
   );
 }
 
