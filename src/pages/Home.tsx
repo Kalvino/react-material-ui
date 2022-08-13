@@ -10,7 +10,9 @@ const Home: FC<any> = (): ReactElement => {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <Typography variant="h3">Home</Typography>
+      <Typography variant="h6">
+        Home
+      </Typography>      
     </Box>
   );
 };
