@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, useState } from "react";
 import {
   Box,
   Link,
@@ -17,8 +17,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
-import SigninDialog from "./auth/login";
-import SignupDialog from "./auth/signup";
+import AuthButton from "./auth/AuthButton";
+import { LoginSchema, SignupSchema } from "./forms/AuthSchema";
 
 interface Props {
   children: React.ReactElement;
@@ -37,19 +37,19 @@ const HideOnScroll = (props: Props) => {
 
 const Navbar: FC = (): ReactElement => {
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = useState(true);
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -65,7 +65,7 @@ const Navbar: FC = (): ReactElement => {
             width: "100%",
             height: "auto",
             backgroundColor: "#fff",
-            color:"primary.dark"
+            color: "primary.dark"
           }}
         >
           <Container maxWidth="xl">
@@ -152,14 +152,14 @@ const Navbar: FC = (): ReactElement => {
                       to={page.path}
                       underline="none"
                       variant="button"
-                      sx={{ color:"inherit", fontSize: "medium", marginLeft: "2rem" }}
+                      sx={{ color: "inherit", fontSize: "medium", marginLeft: "2rem" }}
                     >
                       {page.title}
                     </Link>
                   ))}
                 </Box>
               </Box>
-              <Box 
+              <Box
                 sx={{
                   flexGrow: 1,
                   display: "flex",
@@ -168,12 +168,28 @@ const Navbar: FC = (): ReactElement => {
                   marginLeft: "1rem",
                 }}
               >
-                <SignupDialog />
-                <SigninDialog />
+                <AuthButton
+                  authType="Sign Up"
+                  authSchema={SignupSchema}
+                  defaultValues={{
+                    email: '',
+                    password: '',
+                    password_confirmation: ''
+                  }}
+                />
+
+                <AuthButton
+                  authType="Login"
+                  authSchema={LoginSchema}
+                  defaultValues={{
+                    email: '',
+                    password: ''
+                  }} />
+
                 {auth && (
                   <>
-                    <Tooltip title="Open settings">                  
-                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: "1rem"}}>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: "1rem" }}>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                       </IconButton>
                     </Tooltip>
@@ -207,8 +223,6 @@ const Navbar: FC = (): ReactElement => {
         </Box>
       </AppBar>
     </HideOnScroll>
-    
-
   );
 };
 

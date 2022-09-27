@@ -1,13 +1,13 @@
 import React from 'react';
-import { 
-  Box, 
-  CssBaseline, 
-  Fab, 
-  Fade, 
-  Paper, 
+import {
+  Box,
+  CssBaseline,
+  Fab,
+  Fade,
+  Paper,
   ThemeProvider,
   Toolbar,
-  Typography, 
+  Typography,
   useScrollTrigger
 } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
@@ -91,7 +91,7 @@ function App() {
                 <Route
                   key={route.key}
                   path={route.path}
-                  element={<route.component/>}
+                  element={<route.component />}
                 />
               ))}
             </Routes>
@@ -101,9 +101,9 @@ function App() {
       </ThemeProvider>
 
       <ScrollTop >
-      <Fab size="small" aria-label="scroll back to top">
-        <KeyboardArrowUpIcon />
-      </Fab>
+        <Fab size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
       </ScrollTop>
     </>
   );
