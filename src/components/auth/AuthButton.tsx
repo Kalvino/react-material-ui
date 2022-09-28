@@ -1,15 +1,17 @@
-import { FC, useState } from "react";
+import { FC, MouseEventHandler, MouseEvent, useState } from "react";
 import Button from "@mui/material/Button";
 import AuthForm from "../forms/AuthForm";
 import AurDialog from "../AurDialog";
 import { IAuthType } from "../../interfaces/IAuthType";
 
 
-const AuthButton: FC<IAuthType> = ({ authType, authSchema, defaultValues }) => {
+const AuthButton: FC<IAuthType> = (props) => {
+
+  const { authType } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleIsOpen: any = (event: React.MouseEvent<any>) => {
+  const toggleIsOpen = (event: MouseEvent): void => {
     setIsOpen(prevState => !prevState);
   }
 
@@ -24,10 +26,10 @@ const AuthButton: FC<IAuthType> = ({ authType, authSchema, defaultValues }) => {
       </Button>
 
       <AurDialog
-        open={isOpen}
-        onClose={toggleIsOpen}
+        openState={isOpen}
+        toggleOpenState={toggleIsOpen}
         title={authType}
-        content={<AuthForm authType={authType} authSchema={authSchema} defaultValues={defaultValues} />}
+        content={<AuthForm {...props} />}
       />
     </>
   );

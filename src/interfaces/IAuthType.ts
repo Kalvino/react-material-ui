@@ -1,7 +1,8 @@
+import { SchemaOf } from "yup";
 import { IAuth } from "./IAuth";
 
 export interface IAuthType {
   authType: string;
-  authSchema: any;
+  authSchema: SchemaOf<IAuth>;
   defaultValues: IAuth
 }

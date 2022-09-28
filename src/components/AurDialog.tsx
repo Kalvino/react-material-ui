@@ -9,18 +9,19 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { teal, grey } from "@mui/material/colors";
+import { IAurDialog } from "../interfaces/IAurDialog";
 
-export const AurDialog: FC<any> = ({ open, onClose, title, content }) => {
+export const AurDialog: FC<IAurDialog> = ({ openState, toggleOpenState, title, content }) => {
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={openState} onClose={toggleOpenState}>
       <DialogTitle>
         <Grid container direction="row">
           <Grid item xs={10}>
             <Typography variant="h5">{title}</Typography>
           </Grid>
           <Grid item xs={2} textAlign="right">
-            <IconButton aria-label="close" onClick={onClose}>
+            <IconButton aria-label="close" onClick={toggleOpenState}>
               <CloseIcon />
             </IconButton>
           </Grid>

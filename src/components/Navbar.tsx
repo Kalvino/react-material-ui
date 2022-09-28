@@ -37,7 +37,7 @@ const HideOnScroll = (props: Props) => {
 
 const Navbar: FC = (): ReactElement => {
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

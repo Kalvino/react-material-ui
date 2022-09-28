@@ -6,6 +6,6 @@ export const LoginSchema: yup.SchemaOf<IAuth> = yup.object().shape({
   password: yup.string().min(6).max(20).required(),
 }).required();
 
-export const SignupSchema = LoginSchema.shape({
+export const SignupSchema: yup.SchemaOf<IAuth> = LoginSchema.shape({
   password_confirmation: yup.string().min(6).max(20).required(),
 }).required();

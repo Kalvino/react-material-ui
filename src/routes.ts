@@ -4,7 +4,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 
 // other
-import {FC} from "react";
+import { FC } from "react";
 
 // interface
 interface Route {
@@ -12,7 +12,7 @@ interface Route {
     title: string,
     path: string,
     enabled: boolean,
-    component: FC<{}>
+    component: FC
 }
 
 export const routes: Array<Route> = [

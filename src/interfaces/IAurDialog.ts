@@ -1,6 +1,8 @@
+import { MouseEvent, ReactNode } from "react";
+
 export interface IAurDialog {
-  open: boolean
-  onClose(): any;
+  openState: boolean;
+  toggleOpenState(e: MouseEvent): void;
   title: string;
-  content: any;
+  content: ReactNode;
 }
