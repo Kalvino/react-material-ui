@@ -14,7 +14,7 @@ import { IAurDialog } from "../interfaces/IAurDialog";
 export const AurDialog: FC<IAurDialog> = ({ openState, toggleOpenState, title, content }) => {
 
   return (
-    <Dialog open={openState} onClose={toggleOpenState}>
+    <Dialog data-testid='aur-dialog' open={openState} onClose={toggleOpenState}>
       <DialogTitle>
         <Grid container direction="row">
           <Grid item xs={10}>

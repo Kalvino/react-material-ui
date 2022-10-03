@@ -2,12 +2,13 @@ import { FC, MouseEventHandler, MouseEvent, useState } from "react";
 import Button from "@mui/material/Button";
 import AuthForm from "../forms/AuthForm";
 import AurDialog from "../AurDialog";
-import { IAuthType } from "../../interfaces/IAuthType";
+import { IAuthButton } from "../../interfaces/IAuthButton";
+import { getAuthFormDetails } from "./authFormDetails"
 
 
-const AuthButton: FC<IAuthType> = (props) => {
+const AuthButton: FC<IAuthButton> = ({ authType }) => {
 
-  const { authType } = props;
+  const formDetails = getAuthFormDetails(authType);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -20,6 +21,7 @@ const AuthButton: FC<IAuthType> = (props) => {
       <Button
         variant="outlined"
         onClick={toggleIsOpen}
+        data-testid="toggle"
         sx={{ marginLeft: "1rem" }}
       >
         {authType}
@@ -29,7 +31,7 @@ const AuthButton: FC<IAuthType> = (props) => {
         openState={isOpen}
         toggleOpenState={toggleIsOpen}
         title={authType}
-        content={<AuthForm {...props} />}
+        content={<AuthForm {...formDetails} />}
       />
     </>
   );

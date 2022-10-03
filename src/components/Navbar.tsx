@@ -168,23 +168,9 @@ const Navbar: FC = (): ReactElement => {
                   marginLeft: "1rem",
                 }}
               >
-                <AuthButton
-                  authType="Sign Up"
-                  authSchema={SignupSchema}
-                  defaultValues={{
-                    email: '',
-                    password: '',
-                    password_confirmation: ''
-                  }}
-                />
+                <AuthButton authType="Sign Up" />
 
-                <AuthButton
-                  authType="Login"
-                  authSchema={LoginSchema}
-                  defaultValues={{
-                    email: '',
-                    password: ''
-                  }} />
+                <AuthButton authType="Login" />
 
                 {auth && (
                   <>

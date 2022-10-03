@@ -8,9 +8,9 @@ import { IAuth } from "../../interfaces/IAuth";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { teal, grey } from "@mui/material/colors";
-import { IAuthType } from "../../interfaces/IAuthType";
+import { IAuthFormDetails } from "../../interfaces/IAuthFormDetails";
 
-const AuthForm: FC<IAuthType> = ({ authType, authSchema, defaultValues }) => {
+const AuthForm: FC<IAuthFormDetails> = ({ authType, authSchema, defaultValues }) => {
 
   const {
     handleSubmit,
@@ -21,12 +21,14 @@ const AuthForm: FC<IAuthType> = ({ authType, authSchema, defaultValues }) => {
     defaultValues: defaultValues
   });
 
-  const formSubmitHandler: SubmitHandler<IAuth> = (data: IAuth) => {
+  const formSubmitHandler: SubmitHandler<IAuth> = (data) => {
     console.log(data);
   };
 
+
+
   return (
-    <form onSubmit={handleSubmit(formSubmitHandler)}>
+    <form data-testid="auth-form" onSubmit={handleSubmit(formSubmitHandler)}>
       <Grid container direction="column" >
         <Grid item>
           <Controller
@@ -38,10 +40,8 @@ const AuthForm: FC<IAuthType> = ({ authType, authSchema, defaultValues }) => {
               formState
             }) => (
               <TextField
+                {...{ value, onChange, onBlur }} //assign
                 label="Email"
-                onChange={onChange}
-                value={value}
-                onBlur={onBlur}
                 error={!!error}
                 helperText={error?.message}
                 type="email"
