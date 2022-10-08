@@ -11,17 +11,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import { teal, grey } from "@mui/material/colors";
 import { IAurDialog } from "../interfaces/IAurDialog";
 
-export const AurDialog: FC<IAurDialog> = ({ openState, toggleOpenState, title, content }) => {
+export const AurDialog: FC<IAurDialog> = ({ openState, onClose, title, content }) => {
 
   return (
-    <Dialog data-testid='aur-dialog' open={openState} onClose={toggleOpenState}>
+    <Dialog data-testid='aur-dialog' open={openState} onClose={onClose}>
       <DialogTitle>
         <Grid container direction="row">
           <Grid item xs={10}>
             <Typography variant="h5">{title}</Typography>
           </Grid>
           <Grid item xs={2} textAlign="right">
-            <IconButton aria-label="close" onClick={toggleOpenState}>
+            <IconButton aria-label="close" onClick={onClose}>
               <CloseIcon />
             </IconButton>
           </Grid>

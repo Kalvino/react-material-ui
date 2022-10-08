@@ -36,7 +36,7 @@ describe(AuthButton, () => {
     let authForm = screen.queryByTestId('auth-form');
     expect(authForm).toBeNull();
 
-    // const toggleIsOpen = jest.fn();
+    // const handleClick = jest.fn();
 
     // act(() => {
     //   act(() => {
@@ -46,7 +46,7 @@ describe(AuthButton, () => {
     //   });
     // })
 
-    // expect(toggleIsOpen).toHaveBeenCalledTimes(5)
+    // expect(handleClick).toHaveBeenCalledTimes(5)
 
     act(() => {
       fireEvent.click(authButton);

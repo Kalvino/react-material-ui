@@ -4,17 +4,17 @@ import AurDialog from './AurDialog';
 
 let container: any = null;
 let closeButton: any;
-let toggleIsOpen: any;
+let handleClick: any;
 
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement("div");
   document.body.appendChild(container);
 
-  toggleIsOpen = jest.fn();
+  handleClick = jest.fn();
 
   render(<AurDialog openState={true}
-    toggleOpenState={toggleIsOpen}
+    onClose={handleClick}
     title="Sign Up"
     content="Dialog Content" />, container);
 
@@ -45,6 +45,6 @@ describe(AurDialog, () => {
       fireEvent.click(closeButton);
     })
 
-    expect(toggleIsOpen).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalledTimes(1);
   })
 });

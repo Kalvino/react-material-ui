@@ -12,7 +12,7 @@ const AuthButton: FC<IAuthButton> = ({ authType }) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleIsOpen = (event: MouseEvent): void => {
+  const handleClick = (event: MouseEvent): void => {
     setIsOpen(prevState => !prevState);
   }
 
@@ -20,7 +20,7 @@ const AuthButton: FC<IAuthButton> = ({ authType }) => {
     <>
       <Button
         variant="outlined"
-        onClick={toggleIsOpen}
+        onClick={handleClick}
         data-testid="toggle"
         sx={{ marginLeft: "1rem" }}
       >
@@ -29,7 +29,7 @@ const AuthButton: FC<IAuthButton> = ({ authType }) => {
 
       <AurDialog
         openState={isOpen}
-        toggleOpenState={toggleIsOpen}
+        onClose={handleClick}
         title={authType}
         content={<AuthForm {...formDetails} />}
       />
