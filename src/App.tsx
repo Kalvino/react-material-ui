@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   CssBaseline,
   Fab,
-  Fade,
-  Paper,
   ThemeProvider,
-  Toolbar,
-  Typography,
-  useScrollTrigger
+  Toolbar
 } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -17,45 +13,12 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-
-interface Props {
-  children: React.ReactElement;
-}
-
-const ScrollTop = (props: Props) => {
-  const { children } = props;
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 100,
-  });
-
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const anchor = (
-      (event.target as HTMLDivElement).ownerDocument || document
-    ).querySelector('#back-to-top-anchor');
-
-    if (anchor) {
-      anchor.scrollIntoView({
-        block: 'center',
-      });
-    }
-  };
-
-  return (
-    <Fade in={trigger}>
-      <Box
-        onClick={handleClick}
-        role="presentation"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      >
-        {children}
-      </Box>
-    </Fade>
-  );
-}
+import ScrollTop from './ScrollTop';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
-  const [auth, setAuth] = React.useState(true);
+  const { user, setUser } = useContext(AuthContext);
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -74,7 +37,7 @@ function App() {
   });
 
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
@@ -105,7 +68,7 @@ function App() {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-    </>
+    </AuthContext.Provider>
   );
 }
 

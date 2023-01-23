@@ -7,5 +7,6 @@ export const LoginSchema: yup.SchemaOf<IAuth> = yup.object().shape({
 }).required();
 
 export const SignupSchema: yup.SchemaOf<IAuth> = LoginSchema.shape({
-  password_confirmation: yup.string().min(6).max(20).required(),
+  username: yup.string().min(3).max(20).required(),
+  password_confirmation: yup.string().min(6).max(20).required()
 }).required();

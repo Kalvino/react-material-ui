@@ -18,6 +18,7 @@ export const getAuthFormDetails = (authType: string): IAuthFormDetails => {
       authType: authType,
       authSchema: SignupSchema,
       defaultValues: {
+        username: '',
         email: '',
         password: '',
         password_confirmation: ''

@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -9,26 +10,63 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { teal, grey } from "@mui/material/colors";
 import { IAuthFormDetails } from "../../interfaces/IAuthFormDetails";
+import { useSignup } from "../../hooks/useSignup";
+import { IAuthUser } from "../../interfaces/IAuthUser";
+import ErrorProcessor from "../../utilities/ErrorProcessor";
 
 const AuthForm: FC<IAuthFormDetails> = ({ authType, authSchema, defaultValues }) => {
+
+  const { user, setUser } = useContext(AuthContext);
+  const { signup, isLoading, authErrors } = useSignup();
 
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<IAuth>({
+  } = useForm<IAuth, IAuthUser>({
     resolver: yupResolver(authSchema),
     defaultValues: defaultValues
   });
 
-  const formSubmitHandler: SubmitHandler<IAuth> = (data) => {
-    console.log(data);
+  const formSubmitHandler: SubmitHandler<IAuth> = async (data, e) => {
+    e?.preventDefault();
+
+    signup(data);
   };
 
-
-
   return (
+
     <form data-testid="auth-form" onSubmit={handleSubmit(formSubmitHandler)}>
+      {authErrors && (ErrorProcessor(authErrors))}
+
+      {authType == 'Sign Up' &&
+        <Grid item>
+          <Controller
+            control={control}
+            name="username"
+            render={({
+              field: { onChange, onBlur, value },
+              fieldState: { error },
+              formState
+            }) => (
+              <TextField
+                label="Username"
+                onChange={onChange}
+                value={value}
+                onBlur={onBlur}
+                error={!!error}
+                helperText={error?.message}
+                type="text"
+                style={{ marginBottom: 20 }}
+                margin="dense"
+                variant="outlined"
+                fullWidth
+              />
+            )}
+          />
+        </Grid>
+      }
+
       <Grid container direction="column" >
         <Grid item>
           <Controller
@@ -49,6 +87,7 @@ const AuthForm: FC<IAuthFormDetails> = ({ authType, authSchema, defaultValues })
                 margin="dense"
                 variant="outlined"
                 fullWidth
+                autoComplete="off"
               />
             )}
           />
@@ -111,6 +150,7 @@ const AuthForm: FC<IAuthFormDetails> = ({ authType, authSchema, defaultValues })
           <Button
             type="submit"
             variant="contained"
+            disabled={isLoading}
             endIcon={<Login />}
           >
             {authType}
