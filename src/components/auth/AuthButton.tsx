@@ -1,19 +1,20 @@
-import { FC, MouseEventHandler, MouseEvent, useState } from "react";
+import { FC, MouseEventHandler, MouseEvent, useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import AuthForm from "../forms/AuthForm";
 import AurDialog from "../AurDialog";
 import { IAuthButton } from "../../interfaces/IAuthButton";
 import { getAuthFormDetails } from "./authFormDetails"
+import { IDialogContext } from "../../interfaces/IDialogContext";
+import { DialogContext } from "../../context/DialogContext";
 
 
 const AuthButton: FC<IAuthButton> = ({ authType }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
   const formDetails = getAuthFormDetails(authType);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const handleClick = (event: MouseEvent): void => {
-    setIsOpen(prevState => !prevState);
+    setOpen(!open);
   }
 
   return (
@@ -27,12 +28,12 @@ const AuthButton: FC<IAuthButton> = ({ authType }) => {
         {authType}
       </Button>
 
-      <AurDialog
-        openState={isOpen}
-        onClose={handleClick}
-        title={authType}
-        content={<AuthForm {...formDetails} />}
-      />
+      <DialogContext.Provider value={{ open, setOpen }}>
+        <AurDialog
+          title={authType}
+          content={<AuthForm {...formDetails} />}
+        />
+      </DialogContext.Provider>
     </>
   );
 }

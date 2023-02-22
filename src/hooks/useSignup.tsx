@@ -4,18 +4,20 @@ import { AuthContext } from "../context/AuthContext";
 import { IAuth } from "../interfaces/IAuth";
 import axiosInstance from "../api/axios";
 import { IAuthUser } from "../interfaces/IAuthUser";
+import { DialogContext } from "../context/DialogContext";
 const LOGIN_URL = '/signup';
 
 export const useSignup = () => {
-  const [authErrors, setAuthErrors] = useState<[]>([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [authErrors, setAuthErrors] = useState<[] | string>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { user, setUser } = useContext(AuthContext)
+  const { open, setOpen } = useContext(DialogContext)
 
   const signup = async (data: IAuth) => {
     setIsLoading(true);
     setAuthErrors([]);
 
-    axiosInstance.post<IAuth, IAuthUser>(
+    axiosInstance.post<IAuth, IAuthUser, IAuth>(
       LOGIN_URL,
       data
     ).then(response => {
@@ -28,13 +30,11 @@ export const useSignup = () => {
       console.log(response);
 
       setIsLoading(false)
+      setOpen(!open)
     })
       .catch(errors => {
 
         setIsLoading(false);
-        // const err = JSON.parse(response)
-        // const err = error.response.data.errors[0]
-        console.log(errors);
 
         setAuthErrors(errors)
         // errRef?.current.focus()

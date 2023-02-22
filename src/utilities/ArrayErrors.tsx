@@ -1,17 +1,3 @@
-// const ArrayErrors = (errors: []) => {
-//   return (
-//     <ul
-//       className="error"
-//       aria-live="assertive"
-//     >
-//       {errors.map((err, i) =>
-//         <li key={i} >
-//           {err}
-//         </li>
-//       )}
-//     </ul>
-//   )
-// }
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/system/Stack";
 const ArrayErrors = (errors: []) => {

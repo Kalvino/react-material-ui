@@ -13,8 +13,7 @@ beforeEach(() => {
 
   handleClick = jest.fn();
 
-  render(<AurDialog openState={true}
-    onClose={handleClick}
+  render(<AurDialog
     title="Sign Up"
     content="Dialog Content" />, container);
 

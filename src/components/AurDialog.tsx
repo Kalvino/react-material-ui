@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useContext, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,18 +10,25 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { teal, grey } from "@mui/material/colors";
 import { IAurDialog } from "../interfaces/IAurDialog";
+import { DialogContext } from "../context/DialogContext";
 
-export const AurDialog: FC<IAurDialog> = ({ openState, onClose, title, content }) => {
+export const AurDialog: FC<IAurDialog> = ({ title, content }) => {
+
+  const { open, setOpen } = useContext(DialogContext);
+
+  const handleClick = (): void => {
+    setOpen(!open);
+  }
 
   return (
-    <Dialog data-testid='aur-dialog' open={openState} onClose={onClose}>
+    <Dialog data-testid='aur-dialog' open={open} onClose={handleClick}>
       <DialogTitle>
         <Grid container direction="row">
           <Grid item xs={10}>
             <Typography variant="h5">{title}</Typography>
           </Grid>
           <Grid item xs={2} textAlign="right">
-            <IconButton aria-label="close" onClick={onClose}>
+            <IconButton aria-label="close" onClick={handleClick}>
               <CloseIcon />
             </IconButton>
           </Grid>

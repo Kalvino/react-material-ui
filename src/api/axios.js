@@ -24,16 +24,19 @@ axiosInst.interceptors.request.use(
 // Add a response interceptor
 axiosInst.interceptors.response.use(
   (response) => {
+    console.log(response);
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
-  return response;
+  return response.data;
 },(error) => {
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   if (!error.response) {
+    console.log(error);
     return Promise.reject(error.message)
   }
 
   let errors = error.response.data.errors
+  console.log(error);
   return Promise.reject(errors);
 });
 
