@@ -19,6 +19,7 @@ import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
 import AuthButton from "./auth/AuthButton";
 import { LoginSchema, SignupSchema } from "./forms/AuthSchema";
+import { DialogProvider } from "../context/DialogContext";
 
 interface Props {
   children: React.ReactElement;
@@ -58,6 +59,7 @@ const Navbar: FC = (): ReactElement => {
   };
 
   return (
+    // <DialogProvider>
     <HideOnScroll>
       <AppBar>
         <Box
@@ -77,6 +79,7 @@ const Navbar: FC = (): ReactElement => {
                   mr: 2,
                   display: { xs: "none", md: "flex" },
                 }}
+                data-testid="app-name"
               >
                 Aurora
               </Typography>
@@ -168,6 +171,7 @@ const Navbar: FC = (): ReactElement => {
                   marginLeft: "1rem",
                 }}
               >
+
                 <AuthButton authType="Sign Up" />
 
                 <AuthButton authType="Login" />
@@ -209,6 +213,7 @@ const Navbar: FC = (): ReactElement => {
         </Box>
       </AppBar>
     </HideOnScroll>
+    // </DialogProvider>
   );
 };
 

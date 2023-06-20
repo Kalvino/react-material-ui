@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import App from './App';
 
-xtest('renders learn react link', () => {
+afterEach(cleanup)
+test('renders the app', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const appName = screen.queryByTestId('app-name')
+  expect(appName).toBeInTheDocument();
 });

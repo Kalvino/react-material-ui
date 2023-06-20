@@ -12,13 +12,12 @@ import { teal, grey } from "@mui/material/colors";
 import { IAuthFormDetails } from "../../interfaces/IAuthFormDetails";
 import { useSignup } from "../../hooks/useSignup";
 import { IAuthUser } from "../../interfaces/IAuthUser";
-import ErrorProcessor from "../../utilities/ErrorProcessor";
+import ErrorProcessor from "../../utils/ErrorProcessor";
 import LinearProgress from "@mui/material/LinearProgress";
 
-const AuthForm: FC<IAuthFormDetails> = ({ authType, authSchema, defaultValues }) => {
+const AuthForm: FC<IAuthFormDetails> = ({ authType, authSchema, defaultValues, toggle }) => {
 
-  const { user, setUser } = useContext(AuthContext);
-  const { signup, isLoading, authErrors } = useSignup();
+  const { signup, isLoading, authErrors } = useSignup(toggle);
 
   const {
     handleSubmit,

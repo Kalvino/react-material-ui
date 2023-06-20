@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, useState } from "react";
+import { ReactElement, FC, useState } from "react";
 import { Box, Typography } from "@mui/material";
 
 const Home: FC<any> = (): ReactElement => {
@@ -28,7 +28,7 @@ const Home: FC<any> = (): ReactElement => {
         Home
       </Typography>
 
-      <form onSubmit={handleSubmit} >
+      {/* <form onSubmit={handleSubmit} >
         <label>
           Pick your favorite flavors:
           <select multiple={true} value={flavours} onChange={handleChange}  >
@@ -39,7 +39,7 @@ const Home: FC<any> = (): ReactElement => {
           </select>
         </label>
         <input type="submit" value="Submit" />
-      </form>
+      </form> */}
     </Box>
   );
 };

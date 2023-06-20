@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+// TODO: investigate the need for this useLocalStorage hook
 export const useLocalStorage = () => {
   const [value, setValue] = useState<string | null>(null);
 
@@ -7,7 +7,6 @@ export const useLocalStorage = () => {
     localStorage.setItem(key, value);
     setValue(value);
   };
-
 
   const getItem = (key: string) => {
     const value = localStorage.getItem(key);

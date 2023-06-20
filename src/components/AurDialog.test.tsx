@@ -1,49 +1,48 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
-import { unmountComponentAtNode } from 'react-dom';
+import { render, screen, fireEvent, cleanup, renderHook, act } from '@testing-library/react';
 import AurDialog from './AurDialog';
+import useToggle from '../hooks/useToggle';
 
-let container: any = null;
-let closeButton: any;
-let handleClick: any;
+const { result } = renderHook(() => useToggle(true));
+let [open, toggle, setOpen] = result.current;
+let closeButton: HTMLButtonElement;
 
 beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-
-  handleClick = jest.fn();
+  setOpen = jest.fn((x) => x)
 
   render(<AurDialog
     title="Sign Up"
-    content="Dialog Content" />, container);
+    open={open}
+    toggle={toggle}
+    setOpen={() => setOpen(false)}
+    content="Dialog Content"
+  />);
 
   closeButton = screen.getByRole("button");
+
 });
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+afterEach(cleanup);
 
 describe(AurDialog, () => {
   it('renders correctly without crashing', () => {
     expect(closeButton).toBeInTheDocument();
 
+    // Get the dialog title
     const dialogTitle = screen.getByText("Sign Up");
     expect(dialogTitle).toBeInTheDocument();
 
+    // Get the dialog content title
     const dialogContent = screen.getByText("Dialog Content");
     expect(dialogContent).toBeInTheDocument();
   });
 
   it('toggles openState on clicking close button', async () => {
 
+    // Click the button to close the modal
     act(() => {
       fireEvent.click(closeButton);
-    })
+    });
 
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(setOpen).toHaveBeenCalledTimes(1);
   })
 });

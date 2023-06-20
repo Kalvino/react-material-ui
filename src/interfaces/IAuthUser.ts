@@ -1,5 +1,6 @@
 import { IUser } from "./IUser";
 
-export interface IAuthUser extends IUser {
-  authToken: string;
+export interface IAuthUser {
+  user?: IUser | null;
+  authToken?: string | null;
 }
