@@ -17,7 +17,7 @@ beforeEach(async () => {
       user: {
         id: 1,
         username: "calvin",
-        email: "calvin@aurora.com",
+        email: "calvin@muireact.com",
         role: "admin"
       },
       authToken: "my authtoken"

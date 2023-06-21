@@ -18,8 +18,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
 import AuthButton from "./auth/AuthButton";
-import { LoginSchema, SignupSchema } from "./forms/AuthSchema";
-import { DialogProvider } from "../context/DialogContext";
 
 interface Props {
   children: React.ReactElement;
@@ -81,7 +79,7 @@ const Navbar: FC = (): ReactElement => {
                 }}
                 data-testid="app-name"
               >
-                Aurora
+                MUIReact
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -136,7 +134,7 @@ const Navbar: FC = (): ReactElement => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
               >
-                Aurora
+                MUIReact
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 <Box

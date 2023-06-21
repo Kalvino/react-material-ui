@@ -15,7 +15,7 @@
         "--runTestsByPath",
         "${jest.testFile}"
       ],
-      "cwd": "/home/khal/myprojects/javascript/react/aurora",
+      "cwd": "/home/khal/myprojects/javascript/react/react-material-ui",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true,
